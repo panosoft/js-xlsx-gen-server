@@ -1,10 +1,10 @@
 {
   "name": "@panosoft/js-xlsx-gen-server",
   "version": "0.0.0",
-  "description": "",
+  "description": "An excel spreadsheet rendering server.",
   "main": "bin/index.js",
   "bin": {
-    "@panosoft/js-xlsx-gen-server": "index.js"
+    "js-xlsx-gen-server": "bin/index.js"
   },
   "directories": {
     "test": "test"
@@ -13,5 +13,18 @@
     "test": "mocha"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@panosoft/https-server": "^0.1.2",
+    "co": "^4.6.0",
+    "co-body": "^4.0.0",
+    "is_js": "^0.8.0",
+    "js-xlsx-gen": "^0.1.2",
+    "mime-types": "^2.1.9"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5",
+    "xlsx-style": "^0.8.7"
+  }
 }
