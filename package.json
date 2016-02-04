@@ -1,6 +1,6 @@
 {
   "name": "@panosoft/js-xlsx-gen-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An excel spreadsheet rendering server.",
   "main": "bin/index.js",
   "bin": {
