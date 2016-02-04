@@ -19,15 +19,12 @@ const expectError = (response, message) => {
 
 describe('server', () => {
   var server;
-  const port = 8443;
-  const host = `https://localhost:${port}`;
   before(co.wrap(function * () {
     server = yield startServer(bin);
   }));
   after(() => server.kill());
   describe('jsXlsxGen', () => {
     const path = '/';
-    const url = `${host}${path}`;
     const method = 'POST';
     const headers = { 'content-type': mime.lookup('json') };
     const sheetName = 'sheetA';
@@ -45,37 +42,37 @@ describe('server', () => {
     };
     it('reject request with invalid content-type header', co.wrap(function * () {
       const headers = { 'content-type': mime.lookup('txt') };
-      const response = yield request(url, method, headers);
+      const response = yield request(path, method, headers);
       expectError(response, 'Invalid request: headers: content-type must be application/json.');
     }));
     it('reject request without spreadsheet field', co.wrap(function * () {
       const data = JSON.stringify({});
-      const response = yield request(url, method, headers, data);
+      const response = yield request(path, method, headers, data);
       expectError(response, 'Invalid request: body: spreadsheet: must be defined.');
     }));
     it('reject request with invalid spreadsheet field', co.wrap(function * () {
       const data = JSON.stringify({ spreadsheet: 'invalid' });
-      const response = yield request(url, method, headers, data);
+      const response = yield request(path, method, headers, data);
       expectError(response, 'Invalid request: body: spreadsheet: must be an object.');
     }));
     it('reject request with invalid defaultStyle field', co.wrap(function * () {
       const data = JSON.stringify({ spreadsheet, defaultStyle: 'invalid' });
-      const response = yield request(url, method, headers, data);
+      const response = yield request(path, method, headers, data);
       expectError(response, 'Invalid request: body: defaultStyle: must be an object.');
     }));
     it('reject request with invalid defaultStyle.header field', co.wrap(function * () {
       const data = JSON.stringify({ spreadsheet, defaultStyle: { header: 'invalid' } });
-      const response = yield request(url, method, headers, data);
+      const response = yield request(path, method, headers, data);
       expectError(response, 'Invalid request: body: defaultStyle: header: must be an object.');
     }));
     it('reject request with invalid defaultStyle.data field', co.wrap(function * () {
       const data = JSON.stringify({ spreadsheet, defaultStyle: { data: 'invalid' } });
-      const response = yield request(url, method, headers, data);
+      const response = yield request(path, method, headers, data);
       expectError(response, 'Invalid request: body: defaultStyle: data: must be an object.');
     }));
     it('render spreadsheet', co.wrap(function * () {
       const data = JSON.stringify({ spreadsheet, defaultStyle });
-      const response = yield request(url, method, headers, data);
+      const response = yield request(path, method, headers, data);
       expect(response.statusCode).to.equal(200);
       expect(response.body).to.have.length.greaterThan(0);
       const workbook = xlsx.read(response.body, { type: 'buffer' });
