@@ -1,0 +1,17 @@
+{
+  "name": "@panosoft/js-xlsx-gen-server",
+  "version": "0.0.0",
+  "description": "",
+  "main": "bin/index.js",
+  "bin": {
+    "@panosoft/js-xlsx-gen-server": "index.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
